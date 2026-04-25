@@ -531,7 +531,7 @@
     Completion of this form is voluntary but strongly advised. Responses will be used to tailor the difficulty, duration, and psychological precision of your upcoming experience. Inaccurate or evasive answers will not invalidate the outcome; they will, however, make it more personal. Please answer honestly. Entries may be graded in absentia.
   </div>
 
-  <form id="intakeForm" action="https://formspree.io/f/mpqkbbew" method="POST">
+  <form id="intakeForm" action="https://formspree.io/f/mqewnjzg" method="POST">
 
   <!-- SECTION 1 -->
   <section>
@@ -649,30 +649,24 @@
     </div>
 
     <div class="field">
-      <label>Maximum acceptable doo dad radius from meeting point (in blocks)</label>
-      <input type="number" name="doodad_radius_blocks" placeholder="e.g. 6">
+      <label>In your own words, what IS a doo dad? <span class="hint">Required. The Evaluator retains full authority over the official definition; this is for diagnostic purposes only.</span></label>
+      <textarea name="doodad_definition" required></textarea>
     </div>
 
-    <div class="field">
-      <label>Doo dad budget ceiling, USD</label>
-      <input type="text" name="doodad_budget_usd">
-    </div>
-
-    <div class="field">
-      <label>Are any of the following disqualified as doo dads?</label>
-      <div class="checkbox-grid">
-        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Edible"> Anything edible</label>
-        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Gas station"> Anything from a gas station</label>
-        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Living"> Living creatures</label>
-        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Found"> Found objects</label>
-        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Flowers"> Flowers (too obvious)</label>
-        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Screens"> Anything with a screen</label>
+    <div class="field-row">
+      <div>
+        <label>Maximum acceptable quest radius from meeting point <span class="hint">in blocks</span></label>
+        <input type="number" name="doodad_radius_blocks" placeholder="e.g. 6">
+      </div>
+      <div>
+        <label>Doo dad budget ceiling <span class="hint">USD</span></label>
+        <input type="text" name="doodad_budget_usd">
       </div>
     </div>
 
     <div class="field">
-      <label>Historical doo dad that would have appeased you <span class="hint">for calibration; not to be repeated</span></label>
-      <input type="text" name="historical_doodad">
+      <label>Doo dad limitations the Evaluator should know about <span class="hint">so expectations may be calibrated; e.g. allergies, dietary restrictions, fragility of pockets, fear of certain object categories, prior doo dad trauma</span></label>
+      <textarea name="doodad_limitations"></textarea>
     </div>
   </section>
 
@@ -703,11 +697,16 @@
       <label>Executive functioning domains where assistance would be most welcome</label>
       <div class="checkbox-grid">
         <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Restaurant"> Choosing the restaurant</label>
-        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Transportation"> Deciding if we're walking or rideshare</label>
-        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Drink"> Selecting the drink</label>
-        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="End time"> Determining when the night ends</label>
-        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Topic"> Picking the conversation topic</label>
-        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="All"> All of the above, please</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Drink order"> Selecting your drink and committing on your behalf</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Sentence finishing"> Finishing your sentences when they get too long</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="When to leave"> Telling you when it's time to go home</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Texts"> Drafting your reply to the next text you get</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Friends"> Choosing which of your friends you should call tomorrow</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Outfit retrospective"> Retroactively approving today's outfit</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Identity"> Naming your three (3) defining personality traits</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Ordering"> Ordering for you, sight unseen, from any menu placed before us</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Therapy"> Identifying which of your patterns we are not addressing</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="All"> All of the above, please, I am tired</label>
       </div>
     </div>
   </section>
@@ -721,8 +720,8 @@
 
     <div class="field-row">
       <div>
-        <label>Preferred date of evaluation</label>
-        <input type="date" name="preferred_date">
+        <label>Date of evaluation <span class="hint">non-negotiable</span></label>
+        <input type="text" name="preferred_date" value="04 / 25 / 2026" readonly style="font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em;">
       </div>
       <div>
         <label>Hard stop time <span class="hint">if any</span></label>
@@ -731,7 +730,7 @@
     </div>
 
     <div class="field">
-      <label>Rate your willingness to be perceived as "stinky, sweaty, tattered, worn" in public</label>
+      <label>Rate your willingness to encounter the Evaluator in a state of "stinky, sweaty, tattered, worn" <span class="hint">1 = will flinch visibly · 5 = thrilled, possibly aroused</span></label>
       <div class="scale">
         <label class="scale-option"><input type="radio" name="public_perception" value="1"><span>1</span></label>
         <label class="scale-option"><input type="radio" name="public_perception" value="2"><span>2</span></label>
@@ -739,6 +738,11 @@
         <label class="scale-option"><input type="radio" name="public_perception" value="4"><span>4</span></label>
         <label class="scale-option"><input type="radio" name="public_perception" value="5"><span>5</span></label>
       </div>
+    </div>
+
+    <div class="field">
+      <label>If the Evaluator's smell could be described in exactly three (3) words, which words would you hope for? <span class="hint">aspirational answers permitted; will be evaluated against actual conditions</span></label>
+      <input type="text" name="smell_aspiration" placeholder="e.g. ___, ___, ___">
     </div>
 
     <div class="field">
