@@ -1,838 +1,822 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Experience Intake — Form 7-B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #f2ead8;
+    --paper-dark: #e8dcc0;
+    --stamp-red: #9a2a1e;
+    --stamp-faded: #b85a4e;
+    --rule: #1a1612;
+    --muted: #5a5348;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Newsreader', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(0,0,0,0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(0,0,0,0.04) 0%, transparent 50%),
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.008) 2px, rgba(0,0,0,0.008) 3px);
+  }
+
+  .form-container {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 40px 36px;
+    position: relative;
+    box-shadow:
+      3px 3px 0 var(--ink),
+      8px 8px 30px rgba(0,0,0,0.15);
+  }
+
+  .form-container::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      radial-gradient(circle at 15% 85%, rgba(154, 42, 30, 0.06) 0%, transparent 8%),
+      radial-gradient(circle at 88% 12%, rgba(26, 22, 18, 0.04) 0%, transparent 6%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .form-container > * { position: relative; z-index: 1; }
+
+  /* Header */
+  .header {
+    border-bottom: 3px double var(--ink);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .form-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .jurisdiction {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--ink);
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .stamp {
+    position: absolute;
+    top: 18px;
+    right: -10px;
+    border: 2px solid var(--stamp-red);
+    color: var(--stamp-red);
+    padding: 8px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transform: rotate(-6deg);
+    opacity: 0.75;
+    background: rgba(242, 234, 216, 0.6);
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  /* Preamble */
+  .preamble {
+    background: var(--paper-dark);
+    border-left: 3px solid var(--ink);
+    padding: 14px 18px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    line-height: 1.55;
+    font-style: italic;
+  }
+
+  .preamble strong {
+    font-style: normal;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 36px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4px 8px;
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-family: 'Newsreader', serif;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.005em;
+  }
+
+  .section-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    margin-left: auto;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Fields */
+  .field {
+    margin-bottom: 20px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  label .required {
+    color: var(--stamp-red);
+    margin-left: 3px;
+  }
+
+  label .hint {
+    font-family: 'Newsreader', serif;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted);
+    margin-left: 6px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  textarea,
+  select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--ink);
+    padding: 8px 4px;
+    font-family: 'Newsreader', serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  textarea:focus,
+  select:focus {
+    background: rgba(154, 42, 30, 0.05);
+    border-bottom-color: var(--stamp-red);
+  }
+
+  textarea {
+    min-height: 70px;
+    resize: vertical;
+    border: 1.5px solid var(--ink);
+    padding: 10px;
+    line-height: 1.5;
+  }
+
+  /* Checkbox groups */
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 18px;
+    margin-top: 4px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 1.3;
+    cursor: pointer;
+    padding: 2px 0;
+    font-family: 'Newsreader', serif;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  .checkbox-item input[type="checkbox"],
+  .checkbox-item input[type="radio"] {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    cursor: pointer;
+    margin-top: 3px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .checkbox-item input[type="radio"] { border-radius: 50%; }
+
+  .checkbox-item input[type="checkbox"]:checked::after {
+    content: "✗";
+    position: absolute;
+    top: -4px;
+    left: 1px;
+    font-size: 16px;
+    color: var(--stamp-red);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .checkbox-item input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 6px; height: 6px;
+    background: var(--stamp-red);
+    border-radius: 50%;
+  }
+
+  /* Scale */
+  .scale {
+    display: flex;
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    margin-top: 4px;
+  }
+
+  .scale-option {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid var(--ink);
+    cursor: pointer;
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    transition: background 0.15s ease;
+    position: relative;
+  }
+
+  .scale-option:last-child { border-right: none; }
+
+  .scale-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .scale-option span {
+    display: block;
+    padding: 8px 4px;
+  }
+
+  .scale-option:hover { background: rgba(0,0,0,0.04); }
+
+  .scale-option:has(input:checked) {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 3px double var(--ink);
+  }
+
+  .signature-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .signature-line {
+    border-bottom: 1.5px solid var(--ink);
+    height: 40px;
+    position: relative;
+  }
+
+  .signature-line::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .disclaimer {
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 24px;
+    padding: 12px;
+    border: 1px dashed var(--muted);
+  }
+
+  .submit-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  button {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 14px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 3px 3px 0 var(--stamp-red);
+  }
+
+  button:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--stamp-red);
+  }
+
+  button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--stamp-red);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+
+  .file-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* Confirmation state */
+  .confirmation {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .confirmation.active { display: block; }
+  .form-content.hidden { display: none; }
+
+  .confirmation-stamp {
+    display: inline-block;
+    border: 3px solid var(--stamp-red);
+    color: var(--stamp-red);
+    padding: 16px 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transform: rotate(-3deg);
+    margin-bottom: 30px;
+  }
+
+  .confirmation h2 {
+    font-family: 'Newsreader', serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .confirmation p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 480px;
+    margin: 0 auto 12px;
+  }
+
+  .confirmation-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    margin-top: 30px;
+  }
+
+  @media (max-width: 600px) {
+    .form-container { padding: 28px 20px; }
+    h1 { font-size: 26px; }
+    .field-row { grid-template-columns: 1fr; }
+    .checkbox-grid { grid-template-columns: 1fr; }
+    .stamp { top: 10px; right: -4px; transform: rotate(-8deg) scale(0.85); }
+    .signature-row { grid-template-columns: 1fr; }
+    .scale { flex-wrap: wrap; }
+  }
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1">&lt;title&gt;Date Experience Intake — Form 7-B&lt;/title&gt;</p>
-<p class="p1">&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
-<p class="p1">&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
-<p class="p1">&lt;link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Newsreader:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--ink: #1a1612;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--paper: #f2ead8;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--paper-dark: #e8dcc0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--stamp-red: #9a2a1e;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--stamp-faded: #b85a4e;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--rule: #1a1612;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>--muted: #5a5348;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>* { box-sizing: border-box; margin: 0; padding: 0; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', Georgia, serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--paper);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>min-height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 24px 16px 60px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background-image:</p>
-<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(circle at 20% 30%, rgba(0,0,0,0.03) 0%, transparent 50%),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(circle at 80% 70%, rgba(0,0,0,0.04) 0%, transparent 50%),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.008) 2px, rgba(0,0,0,0.008) 3px);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.form-container {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 780px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--paper);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 2px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 40px 36px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow:</p>
-<p class="p1"><span class="Apple-converted-space">      </span>3px 3px 0 var(--ink),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>8px 8px 30px rgba(0,0,0,0.15);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.form-container::before {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>content: "";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>top: 0; left: 0; right: 0; bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background-image:</p>
-<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(circle at 15% 85%, rgba(154, 42, 30, 0.06) 0%, transparent 8%),</p>
-<p class="p1"><span class="Apple-converted-space">      </span>radial-gradient(circle at 88% 12%, rgba(26, 22, 18, 0.04) 0%, transparent 6%);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>z-index: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.form-container &gt; * { position: relative; z-index: 1; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Header */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.header {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 3px double var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.form-id {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.18em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>h1 {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 34px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.05;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.01em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.subtitle {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.jurisdiction {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 9px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.15em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-top: 1px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.stamp {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>top: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>right: -10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 2px solid var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 8px 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.2em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: rotate(-6deg);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.75;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(242, 234, 216, 0.6);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.3;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Preamble */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.preamble {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--paper-dark);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-left: 3px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 14px 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 32px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.55;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.preamble strong {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-style: normal;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.12em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Sections */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>section {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 36px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-header {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: baseline;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding-bottom: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-num {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--paper);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 4px 8px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-title {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: -0.005em;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.section-note {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 9px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-left: auto;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Fields */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.field {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.field-row {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 1fr 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>label {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 500;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.15em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>label .required {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-left: 3px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>label .hint {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-left: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="text"],</p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="number"],</p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="date"],</p>
-<p class="p1"><span class="Apple-converted-space">  </span>textarea,</p>
-<p class="p1"><span class="Apple-converted-space">  </span>select {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 100%;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: transparent;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1.5px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 8px 4px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>outline: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.15s ease, border-color 0.15s ease;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="text"]:focus,</p>
-<p class="p1"><span class="Apple-converted-space">  </span>input[type="number"]:focus,</p>
-<p class="p1"><span class="Apple-converted-space">  </span>textarea:focus,</p>
-<p class="p1"><span class="Apple-converted-space">  </span>select:focus {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: rgba(154, 42, 30, 0.05);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom-color: var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>textarea {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>min-height: 70px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>resize: vertical;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Checkbox groups */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-grid {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: repeat(2, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px 18px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-item {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: flex-start;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.3;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 2px 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 400;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 0;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-item input[type="checkbox"],</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-item input[type="radio"] {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>appearance: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>height: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: transparent;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 3px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-shrink: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-item input[type="radio"] { border-radius: 50%; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-item input[type="checkbox"]:checked::after {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>content: "✗";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>top: -4px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>left: 1px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.checkbox-item input[type="radio"]:checked::after {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>content: "";</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>top: 2px; left: 2px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>width: 6px; height: 6px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-radius: 50%;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Scale */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1.5px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale-option {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex: 1;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-right: 1px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.08em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: background 0.15s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale-option:last-child { border-right: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale-option input[type="radio"] {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>pointer-events: none;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale-option span {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 8px 4px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale-option:hover { background: rgba(0,0,0,0.04); }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.scale-option:has(input:checked) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--paper);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Footer */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.footer {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding-top: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-top: 3px double var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.signature-row {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>grid-template-columns: 2fr 1fr;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.signature-line {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border-bottom: 1.5px solid var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>height: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.signature-line::after {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>content: attr(data-label);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>bottom: -16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 9px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.15em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.disclaimer {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.5;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 1px dashed var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.submit-section {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>justify-content: space-between;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>flex-wrap: wrap;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>gap: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>background: var(--ink);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--paper);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 14px 28px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 11px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.18em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transition: transform 0.1s ease, box-shadow 0.1s ease;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 3px 3px 0 var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>button:hover:not(:disabled) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: translate(-1px, -1px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 4px 4px 0 var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>button:active:not(:disabled) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: translate(2px, 2px);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>box-shadow: 1px 1px 0 var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>button:disabled {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>opacity: 0.5;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>cursor: wait;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.file-number {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.1em;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>/* Confirmation state */</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirmation {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: none;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 60px 20px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirmation.active { display: block; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>.form-content.hidden { display: none; }</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirmation-stamp {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>border: 3px solid var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--stamp-red);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>padding: 16px 32px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 700;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.2em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>text-transform: uppercase;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>transform: rotate(-3deg);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirmation h2 {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'Newsreader', serif;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 28px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-weight: 600;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-bottom: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirmation p {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>line-height: 1.6;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-style: italic;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>max-width: 480px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin: 0 auto 12px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>.confirmation-id {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-family: 'JetBrains Mono', monospace;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>font-size: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>color: var(--muted);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>letter-spacing: 0.15em;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>margin-top: 30px;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>@media (max-width: 600px) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.form-container { padding: 28px 20px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>h1 { font-size: 26px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.field-row { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.checkbox-grid { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.stamp { top: 10px; right: -4px; transform: rotate(-8deg) scale(0.85); }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.signature-row { grid-template-columns: 1fr; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>.scale { flex-wrap: wrap; }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="form-container"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="stamp"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Confidential&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>File Under 7-B</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- FORM CONTENT --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="form-content" id="formContent"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="form-id"&gt;Form 7-B · Rev. 2026.04 · Domain: Recreational Judgment&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Date Experience Intake&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p class="subtitle"&gt;Personalization questionnaire for prospective riddle-and-quest participants&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="jurisdiction"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Issuing Authority: The Evaluator&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Jurisdiction: North Seattle&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Status: Pending&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="preamble"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;strong&gt;Notice to Respondent&lt;/strong&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>Completion of this form is voluntary but strongly advised. Responses will be used to tailor the difficulty, duration, and psychological precision of your upcoming experience. Inaccurate or evasive answers will not invalidate the outcome; they will, however, make it more personal. Please answer honestly. Entries may be graded in absentia.</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;form id="intakeForm" action="https://formspree.io/f/mpqkbbew" method="POST"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SECTION 1 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-num"&gt;§ 01&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-title"&gt;Respondent Identification&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-note"&gt;All fields required&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Name as you'd like it shouted &lt;span class="required"&gt;*&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" name="name" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Preferred pronouns&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" name="pronouns"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;One (1) unflattering adjective about yourself&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" name="unflattering_adjective"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;One (1) flattering adjective you secretly believe&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" name="flattering_adjective"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SECTION 2 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-num"&gt;§ 02&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-title"&gt;Philosophical Attachments&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-note"&gt;For punishment-design purposes&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Top three (3) favorite philosophers, ranked &lt;span class="hint"&gt;in the event of Quest failure, these will be publicly mischaracterized&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" name="philosopher_1" placeholder="1." style="margin-bottom: 8px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" name="philosopher_2" placeholder="2." style="margin-bottom: 8px;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" name="philosopher_3" placeholder="3."&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Which thinker's ideas would be most devastating to hear misquoted?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" name="most_devastating_misquote"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Preferred conceptual battlefield for the 3-hour debate (check all that apply)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Semantics"&gt; Semantics&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Subjectivity"&gt; Subjectivity&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Meaning-making"&gt; Meaning-making&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Consent in language"&gt; The nature of consent in language&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Map vs territory"&gt; Whether the map is the territory&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="What we owe one another"&gt; What we owe one another&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Free will"&gt; Free will (tired but fun)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="debate_topics" value="Dealer's choice"&gt; Dealer's choice&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SECTION 3 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-num"&gt;§ 03&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-title"&gt;Riddle Preferences&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-note"&gt;Difficulty calibration&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Preferred riddle genre&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="riddle_genre" value="Classical"&gt; Classical (sphinx-adjacent)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="riddle_genre" value="Lateral thinking"&gt; Lateral thinking puzzle&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="riddle_genre" value="Wordplay"&gt; Wordplay / pun-based&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="riddle_genre" value="Semantic trap"&gt; Semantic trap&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="riddle_genre" value="Unsolvable"&gt; Unsolvable on purpose&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="riddle_genre" value="Evaluator's choice"&gt; I trust the Evaluator&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Your honest riddle-solving self-assessment (1 = dire, 5 = smug)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scale"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="riddle_skill" value="1"&gt;&lt;span&gt;1&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="riddle_skill" value="2"&gt;&lt;span&gt;2&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="riddle_skill" value="3"&gt;&lt;span&gt;3&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="riddle_skill" value="4"&gt;&lt;span&gt;4&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="riddle_skill" value="5"&gt;&lt;span&gt;5&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Are hints permitted? &lt;span class="hint"&gt;They will cost you.&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="hints" value="Yes any cost"&gt; Yes, at any cost&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="hints" value="One reluctantly"&gt; One, reluctantly&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="hints" value="No"&gt; No. I have my pride.&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SECTION 4 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-num"&gt;§ 04&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-title"&gt;Doo Dad Parameters&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-note"&gt;Quest calibration&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Maximum acceptable doo dad radius from meeting point (in blocks)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="number" name="doodad_radius_blocks" placeholder="e.g. 6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Doo dad budget ceiling, USD&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" name="doodad_budget_usd"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Are any of the following disqualified as doo dads?&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="doodad_disqualified" value="Edible"&gt; Anything edible&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="doodad_disqualified" value="Gas station"&gt; Anything from a gas station&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="doodad_disqualified" value="Living"&gt; Living creatures&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="doodad_disqualified" value="Found"&gt; Found objects&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="doodad_disqualified" value="Flowers"&gt; Flowers (too obvious)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="doodad_disqualified" value="Screens"&gt; Anything with a screen&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Historical doo dad that would have appeased you &lt;span class="hint"&gt;for calibration; not to be repeated&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" name="historical_doodad"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SECTION 5 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-num"&gt;§ 05&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-title"&gt;Sensory &amp; Environmental&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-note"&gt;§ applies only upon riddle success&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Arm selection preference, should the reward tier be unlocked&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="arm_preference" value="Left"&gt; Left&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="arm_preference" value="Right"&gt; Right&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="arm_preference" value="Evaluator's choice"&gt; Evaluator's choice&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="radio" name="arm_preference" value="Both sequentially"&gt; Both, sequentially&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Any scent sensitivities or allergies that should be disclosed&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea name="scent_sensitivities"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Executive functioning domains where assistance would be most welcome&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="checkbox-grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="exec_function_help" value="Restaurant"&gt; Choosing the restaurant&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="exec_function_help" value="Transportation"&gt; Deciding if we're walking or rideshare&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="exec_function_help" value="Drink"&gt; Selecting the drink&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="exec_function_help" value="End time"&gt; Determining when the night ends&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="exec_function_help" value="Topic"&gt; Picking the conversation topic&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="checkbox-item"&gt;&lt;input type="checkbox" name="exec_function_help" value="All"&gt; All of the above, please&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- SECTION 6 --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;section&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="section-header"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-num"&gt;§ 06&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="section-title"&gt;Logistical Declarations&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Preferred date of evaluation&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="date" name="preferred_date"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label&gt;Hard stop time &lt;span class="hint"&gt;if any&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" name="hard_stop_time" placeholder="e.g. 11 PM or none"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Rate your willingness to be perceived as "stinky, sweaty, tattered, worn" in public&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="scale"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="public_perception" value="1"&gt;&lt;span&gt;1&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="public_perception" value="2"&gt;&lt;span&gt;2&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="public_perception" value="3"&gt;&lt;span&gt;3&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="public_perception" value="4"&gt;&lt;span&gt;4&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label class="scale-option"&gt;&lt;input type="radio" name="public_perception" value="5"&gt;&lt;span&gt;5&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="field"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;label&gt;Anything else the Evaluator should know &lt;span class="hint"&gt;fears, soft spots, emergency contacts&lt;/span&gt;&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;textarea name="other_notes"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- FOOTER --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="footer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="signature-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label style="margin-bottom: 4px;"&gt;Signature (type full name)&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" name="signature" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label style="margin-bottom: 4px;"&gt;Date&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="date" name="signature_date" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="disclaimer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>By submitting this form, the Respondent acknowledges that outcomes are non-negotiable post-riddle, that philosophical misrepresentations delivered under § 02 conditions are intentional and not subject to correction, and that the Evaluator reserves the right to modify any portion of the experience at their sole discretion. Armpit huffs, where awarded, are final.</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="submit-section"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="file-number"&gt;FILE № 7B-0001-NS&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button type="submit" id="submitBtn"&gt;Submit for Review&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/form&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- CONFIRMATION STATE --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="confirmation" id="confirmation"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="confirmation-stamp"&gt;Received&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Your submission has been filed.&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;The Evaluator will review your responses in due course. Do not contact the Evaluator. The Evaluator will contact you.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;You may now resume normal activities. You will not feel normal.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="confirmation-id"&gt;FILE № 7B-0001-NS · STATUS: UNDER REVIEW&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('intakeForm').addEventListener('submit', async function(e) {</p>
-<p class="p1"><span class="Apple-converted-space">    </span>e.preventDefault();</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>const form = e.target;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>const btn = document.getElementById('submitBtn');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.disabled = true;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>btn.textContent = 'Filing...';</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>try {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>const response = await fetch(form.action, {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>method: 'POST',</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body: new FormData(form),</p>
-<p class="p1"><span class="Apple-converted-space">        </span>headers: { 'Accept': 'application/json' }</p>
-<p class="p1"><span class="Apple-converted-space">      </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>if (response.ok) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('formContent').classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('confirmation').classList.add('active');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>window.scrollTo({ top: 0, behavior: 'smooth' });</p>
-<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>btn.textContent = 'Submit for Review';</p>
-<p class="p1"><span class="Apple-converted-space">        </span>alert('Submission failed. Please try again.');</p>
-<p class="p1"><span class="Apple-converted-space">      </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>} catch (err) {</p>
-<p class="p1"><span class="Apple-converted-space">      </span>btn.disabled = false;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>btn.textContent = 'Submit for Review';</p>
-<p class="p1"><span class="Apple-converted-space">      </span>alert('Network error. Please try again.');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>});</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<div class="form-container">
+
+  <div class="stamp">
+    Confidential<br>
+    File Under 7-B
+  </div>
+
+  <!-- FORM CONTENT -->
+  <div class="form-content" id="formContent">
+
+  <div class="header">
+    <div class="form-id">Form 7-B · Rev. 2026.04 · Domain: Recreational Judgment</div>
+    <h1>Date Experience Intake</h1>
+    <p class="subtitle">Personalization questionnaire for prospective riddle-and-quest participants</p>
+    <div class="jurisdiction">
+      <span>Issuing Authority: The Evaluator</span>
+      <span>Jurisdiction: North Seattle</span>
+      <span>Status: Pending</span>
+    </div>
+  </div>
+
+  <div class="preamble">
+    <strong>Notice to Respondent</strong>
+    Completion of this form is voluntary but strongly advised. Responses will be used to tailor the difficulty, duration, and psychological precision of your upcoming experience. Inaccurate or evasive answers will not invalidate the outcome; they will, however, make it more personal. Please answer honestly. Entries may be graded in absentia.
+  </div>
+
+  <form id="intakeForm" action="https://formspree.io/f/mpqkbbew" method="POST">
+
+  <!-- SECTION 1 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">§ 01</span>
+      <span class="section-title">Respondent Identification</span>
+      <span class="section-note">All fields required</span>
+    </div>
+
+    <div class="field-row">
+      <div>
+        <label>Name as you'd like it shouted <span class="required">*</span></label>
+        <input type="text" name="name" required>
+      </div>
+      <div>
+        <label>Preferred pronouns</label>
+        <input type="text" name="pronouns">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div>
+        <label>One (1) unflattering adjective about yourself</label>
+        <input type="text" name="unflattering_adjective">
+      </div>
+      <div>
+        <label>One (1) flattering adjective you secretly believe</label>
+        <input type="text" name="flattering_adjective">
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">§ 02</span>
+      <span class="section-title">Philosophical Attachments</span>
+      <span class="section-note">For punishment-design purposes</span>
+    </div>
+
+    <div class="field">
+      <label>Top three (3) favorite philosophers, ranked <span class="hint">in the event of Quest failure, these will be publicly mischaracterized</span></label>
+      <input type="text" name="philosopher_1" placeholder="1." style="margin-bottom: 8px;">
+      <input type="text" name="philosopher_2" placeholder="2." style="margin-bottom: 8px;">
+      <input type="text" name="philosopher_3" placeholder="3.">
+    </div>
+
+    <div class="field">
+      <label>Which thinker's ideas would be most devastating to hear misquoted?</label>
+      <input type="text" name="most_devastating_misquote">
+    </div>
+
+    <div class="field">
+      <label>Preferred conceptual battlefield for the 3-hour debate (check all that apply)</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Semantics"> Semantics</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Subjectivity"> Subjectivity</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Meaning-making"> Meaning-making</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Consent in language"> The nature of consent in language</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Map vs territory"> Whether the map is the territory</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="What we owe one another"> What we owe one another</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Free will"> Free will (tired but fun)</label>
+        <label class="checkbox-item"><input type="checkbox" name="debate_topics" value="Dealer's choice"> Dealer's choice</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">§ 03</span>
+      <span class="section-title">Riddle Preferences</span>
+      <span class="section-note">Difficulty calibration</span>
+    </div>
+
+    <div class="field">
+      <label>Preferred riddle genre</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="radio" name="riddle_genre" value="Classical"> Classical (sphinx-adjacent)</label>
+        <label class="checkbox-item"><input type="radio" name="riddle_genre" value="Lateral thinking"> Lateral thinking puzzle</label>
+        <label class="checkbox-item"><input type="radio" name="riddle_genre" value="Wordplay"> Wordplay / pun-based</label>
+        <label class="checkbox-item"><input type="radio" name="riddle_genre" value="Semantic trap"> Semantic trap</label>
+        <label class="checkbox-item"><input type="radio" name="riddle_genre" value="Unsolvable"> Unsolvable on purpose</label>
+        <label class="checkbox-item"><input type="radio" name="riddle_genre" value="Evaluator's choice"> I trust the Evaluator</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Your honest riddle-solving self-assessment (1 = dire, 5 = smug)</label>
+      <div class="scale">
+        <label class="scale-option"><input type="radio" name="riddle_skill" value="1"><span>1</span></label>
+        <label class="scale-option"><input type="radio" name="riddle_skill" value="2"><span>2</span></label>
+        <label class="scale-option"><input type="radio" name="riddle_skill" value="3"><span>3</span></label>
+        <label class="scale-option"><input type="radio" name="riddle_skill" value="4"><span>4</span></label>
+        <label class="scale-option"><input type="radio" name="riddle_skill" value="5"><span>5</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Are hints permitted? <span class="hint">They will cost you.</span></label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="radio" name="hints" value="Yes any cost"> Yes, at any cost</label>
+        <label class="checkbox-item"><input type="radio" name="hints" value="One reluctantly"> One, reluctantly</label>
+        <label class="checkbox-item"><input type="radio" name="hints" value="No"> No. I have my pride.</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">§ 04</span>
+      <span class="section-title">Doo Dad Parameters</span>
+      <span class="section-note">Quest calibration</span>
+    </div>
+
+    <div class="field">
+      <label>Maximum acceptable doo dad radius from meeting point (in blocks)</label>
+      <input type="number" name="doodad_radius_blocks" placeholder="e.g. 6">
+    </div>
+
+    <div class="field">
+      <label>Doo dad budget ceiling, USD</label>
+      <input type="text" name="doodad_budget_usd">
+    </div>
+
+    <div class="field">
+      <label>Are any of the following disqualified as doo dads?</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Edible"> Anything edible</label>
+        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Gas station"> Anything from a gas station</label>
+        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Living"> Living creatures</label>
+        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Found"> Found objects</label>
+        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Flowers"> Flowers (too obvious)</label>
+        <label class="checkbox-item"><input type="checkbox" name="doodad_disqualified" value="Screens"> Anything with a screen</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Historical doo dad that would have appeased you <span class="hint">for calibration; not to be repeated</span></label>
+      <input type="text" name="historical_doodad">
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">§ 05</span>
+      <span class="section-title">Sensory & Environmental</span>
+      <span class="section-note">§ applies only upon riddle success</span>
+    </div>
+
+    <div class="field">
+      <label>Arm selection preference, should the reward tier be unlocked</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="radio" name="arm_preference" value="Left"> Left</label>
+        <label class="checkbox-item"><input type="radio" name="arm_preference" value="Right"> Right</label>
+        <label class="checkbox-item"><input type="radio" name="arm_preference" value="Evaluator's choice"> Evaluator's choice</label>
+        <label class="checkbox-item"><input type="radio" name="arm_preference" value="Both sequentially"> Both, sequentially</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Any scent sensitivities or allergies that should be disclosed</label>
+      <textarea name="scent_sensitivities"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Executive functioning domains where assistance would be most welcome</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Restaurant"> Choosing the restaurant</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Transportation"> Deciding if we're walking or rideshare</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Drink"> Selecting the drink</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="End time"> Determining when the night ends</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="Topic"> Picking the conversation topic</label>
+        <label class="checkbox-item"><input type="checkbox" name="exec_function_help" value="All"> All of the above, please</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">§ 06</span>
+      <span class="section-title">Logistical Declarations</span>
+    </div>
+
+    <div class="field-row">
+      <div>
+        <label>Preferred date of evaluation</label>
+        <input type="date" name="preferred_date">
+      </div>
+      <div>
+        <label>Hard stop time <span class="hint">if any</span></label>
+        <input type="text" name="hard_stop_time" placeholder="e.g. 11 PM or none">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Rate your willingness to be perceived as "stinky, sweaty, tattered, worn" in public</label>
+      <div class="scale">
+        <label class="scale-option"><input type="radio" name="public_perception" value="1"><span>1</span></label>
+        <label class="scale-option"><input type="radio" name="public_perception" value="2"><span>2</span></label>
+        <label class="scale-option"><input type="radio" name="public_perception" value="3"><span>3</span></label>
+        <label class="scale-option"><input type="radio" name="public_perception" value="4"><span>4</span></label>
+        <label class="scale-option"><input type="radio" name="public_perception" value="5"><span>5</span></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Anything else the Evaluator should know <span class="hint">fears, soft spots, emergency contacts</span></label>
+      <textarea name="other_notes"></textarea>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="signature-row">
+      <div>
+        <label style="margin-bottom: 4px;">Signature (type full name)</label>
+        <input type="text" name="signature" required>
+      </div>
+      <div>
+        <label style="margin-bottom: 4px;">Date</label>
+        <input type="date" name="signature_date" required>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      By submitting this form, the Respondent acknowledges that outcomes are non-negotiable post-riddle, that philosophical misrepresentations delivered under § 02 conditions are intentional and not subject to correction, and that the Evaluator reserves the right to modify any portion of the experience at their sole discretion. Armpit huffs, where awarded, are final.
+    </div>
+
+    <div class="submit-section">
+      <span class="file-number">FILE № 7B-0001-NS</span>
+      <button type="submit" id="submitBtn">Submit for Review</button>
+    </div>
+  </div>
+
+  </form>
+
+  </div>
+
+  <!-- CONFIRMATION STATE -->
+  <div class="confirmation" id="confirmation">
+    <div class="confirmation-stamp">Received</div>
+    <h2>Your submission has been filed.</h2>
+    <p>The Evaluator will review your responses in due course. Do not contact the Evaluator. The Evaluator will contact you.</p>
+    <p>You may now resume normal activities. You will not feel normal.</p>
+    <div class="confirmation-id">FILE № 7B-0001-NS · STATUS: UNDER REVIEW</div>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('intakeForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Filing...';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        document.getElementById('formContent').classList.add('hidden');
+        document.getElementById('confirmation').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Submit for Review';
+        alert('Submission failed. Please try again.');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit for Review';
+      alert('Network error. Please try again.');
+    }
+  });
+</script>
+
 </body>
 </html>
